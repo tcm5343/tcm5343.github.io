@@ -17,6 +17,7 @@ jobs:
       - name: Build static files
         id: build
         run: |
+          yarn install
           yarn build
 
       - name: Upload static files as artifact
