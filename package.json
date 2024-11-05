@@ -8,8 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "yarn run build",
-    "deploy": "gh-pages -b main -d build"
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -b main -d dist"
   },
   "dependencies": {
     "react": "^18.3.1",
