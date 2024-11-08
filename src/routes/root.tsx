@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import reactLogo from '../assets/react.svg'
 import '../App.css'
-import React  from 'react';
 import { Link } from "react-router-dom";
 import Blog from "../blogs/blog.mdx";
 
