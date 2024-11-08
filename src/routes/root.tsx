@@ -1,25 +1,23 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import reactLogo from '../assets/react.svg'
+import '../App.css'
 import React  from 'react';
-import './App.css'
-import Header from './Header'
+import { Link } from "react-router-dom";
+import Blog from "../blogs/blog.mdx";
 
-function App() {
+function Root() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-    <Header></Header>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
+        <Blog />
         <a href="https://react.dev" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Victoria Kathryn Miller</h1>
+      <h1>WORK IN PROGRESSO</h1>
+      <Link to={`blog/3`}>Your Name</Link>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
@@ -35,4 +33,4 @@ function App() {
   )
 }
 
-export default App
+export default Root
