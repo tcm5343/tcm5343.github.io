@@ -3,8 +3,6 @@ layout: post
 title: "Pytest: Mocking Module Statements"
 ---
 
-## Introduction
-
 Let's say we have a Python module with a constant variable or a function decorator on a function we want to test. Those statements are initialized when a module is imported, how can we test them? How can we change them on a test by test basis? In this post, I'm going to show different ways to mock Python module statements.
 
 <!-- more -->
@@ -20,7 +18,6 @@ How can we initialize a module under test in a different way? How could we chang
 Sometimes a real world example is easier to understand than a simple example. Let's begin with a module named `s3.py` containing utilities for interacting with Amazon S3. Consider our first iteration below.
 
 Note: The contents of `get_all_buckets()` but instead where the client is defined.
-
 
 {% highlight python linenos %}
 # s3.py
@@ -62,7 +59,7 @@ def mock_boto3_client():
 def test_get_all_objects_when_no_buckets(mock_boto3_client):
     mock_boto3_client.client.return_value.list_buckets.return_value = {'Buckets': []}
     assert get_all_buckets() == []
- {% endhighlight %}
+{% endhighlight %}
 
 This test file runs and executes as expected. Right now, our file under test contains both statements (ex. imports) and definitions (`get_all_buckets()`). When our module is imported then, only the import statements are executed. That allows us to easily mock our S3 client.
 
@@ -88,7 +85,7 @@ def get_all_buckets() -> List[Dict]:
     response = S3_CLIENT.list_buckets(ContinuationToken=continuationToken)
     result.extend(response['Buckets'])
   return result
- {% endhighlight %}
+{% endhighlight %}
 
 If we run our test again, you will get a `NoCredentialsError` from `botocore`. This is a clear indication that our client is no longer mocked and is trying to reach out to AWS.
 
@@ -104,11 +101,6 @@ This requires two changes to our mock fixture.
 The first change is a violation of typical testing idioms. We almost always (this being an exception) mock a package where it is being used rather than where it is defined. For `s3.py`, we need to mock `boto3` before we import `s3.py`. This violation of norms is what allows us to initialize the `S3_CLIENT` to our mock.
 
 Consider the updated test below.
-
-{% highlight python linenos %}
-# s3_test.py
-
- {% endhighlight %}
 
 [python-modules]: https://docs.python.org/3/tutorial/modules.html#more-on-modules
 [import-reload]: https://docs.python.org/3/library/importlib.html#importlib.reload
