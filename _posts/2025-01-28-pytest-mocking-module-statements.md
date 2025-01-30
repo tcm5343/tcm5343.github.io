@@ -20,7 +20,7 @@ Sometimes a real world example is easier to understand than a simple example. Le
 Note: The contents of `get_all_buckets()` but instead where the client is defined.
 
 {% highlight python linenos %}
-# s3.py
+""" s3.py """
 from typing import List, Dict
 
 import boto3
@@ -41,7 +41,7 @@ def get_all_buckets() -> List[Dict]:
 Let's create a simple test file.
 
 {% highlight python linenos %}
-# s3_test.py
+""" s3_test.py """
 from unittest.mock import patch
 
 import pytest
@@ -68,7 +68,7 @@ This test file runs and executes as expected. Right now, our file under test con
 Let's say this is to be ran in an AWS Lambda. We want to be careful about how many clients we create, since that increases runtime and cost, so we want to use the same S3 client. One option is to pass around the S3 client as a parameter to our utility function calls. Instead, to simplify our function signatures, we chose to declare a module constant. This means our S3 client has now changes from being in a definition to being a statement.
 
 {% highlight python linenos %}
-# s3.py
+""" s3.py """
 from typing import List, Dict
 
 import boto3
